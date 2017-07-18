@@ -1,33 +1,24 @@
 /*
  *author:hfz
- *create date:2017/7/17
+ *create date:2017/7/18
  *version:1.0
  */
-
-/*
- *this source file is echo server.
- *this version use "select()"
- *select() needs to include <sys/select.h> <sys/time.h>
- */
-#include "./unp.h"
+#include "echo_server.h"
+#include <inttype.h>
 namespace echo_server
 {
-class SockRecoder
+void Server::Init(uint16_t port)
 {
-public:
-	void AddStatus(int sockfd);//input parameter
-	void RemoveStatus(int index);//this function needs to be provided client array index
-private:
-	int client[FD_SETSIZE];
-	fd_set rset;
-};
-class Server
-{
-public:
-	void Init(int port);
-	int ChangeReadable(int connfd);
-	int ChangeUnreadable(int index);
-private:
-	SockRecorder recorder;
-};
+	listenfd = socket(AF_INET,SOCK_STREAM,0);
+	bzero(&servaddr,sizeof(servaddr));
+	servaddr.sin_family = AF_INET;
+	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	servaddr.sin_port = htons(port);
+	bind(listenfd,(SA*)&servaddr,sizeof(servaddr));
+	listen(listenfd,10);
+	
+	recorder.Init();
+	FD_ZERO(&allset);
+	FD_SET(listenfd,&allset);
+}
 };
