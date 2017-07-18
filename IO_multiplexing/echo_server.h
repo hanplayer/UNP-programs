@@ -13,6 +13,7 @@
 #define __ECHO_SERVER_H__
 #include "./unp.h"
 #include "sock_recorder.h"
+#include <inttypes.h>
 namespace echo_server
 {
 class Server
@@ -20,8 +21,9 @@ class Server
 public:
 	Server(){};
 	~Server(){};
-	void Init(int port);
-	int WaitNewClient(int connfd);
+	void Init(uint16_t port);
+	int WaitNewClient(fd_set *p_set);
+	int GetConnectFd();
 	int AddNewClient(int index);
 	int ReadAndWrite();
 private:
