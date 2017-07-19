@@ -24,12 +24,13 @@ public:
 	void Init(uint16_t port);
 	int WaitNewClient(fd_set *p_set);
 	int GetConnectFd();
-	int AddNewClient(int index);
+	int AddNewClient(int fd);
 	int ReadAndWrite(void);
-private:
+
 	SockRecorder recorder;
-	struct sockaddr_in servaddr;
 	fd_set allset;	
+private:
+	struct sockaddr_in servaddr;
 	int listenfd;
 };
 };
