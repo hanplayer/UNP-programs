@@ -9,22 +9,22 @@ namespace echo_server
 {
 void SockRecorder::SetMaxFd(int max)
 {
-	MaxFd = max;
+    MaxFd = max;
 }
 int SockRecorder::GetMaxFd()
 {
-	return MaxFd;
+    return MaxFd;
 }
 int SockRecorder::AddStatus(int sockfd)
 {
-	for(int i = 0; i < FD_SETSIZE;i++)
-	{
-		if(client[i] < 0)
-		{
-			client[i] = sockfd;
-			return i;
-		}
-	}
-	return -1;
+    for(int i = 0; i < FD_SETSIZE;i++)
+    {
+        if(client[i] < 0)
+        {
+            client[i] = sockfd;
+            return i;
+        }
+    }
+    return -1;
 }
 };

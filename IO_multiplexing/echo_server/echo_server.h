@@ -19,19 +19,19 @@ namespace echo_server
 class Server
 {
 public:
-	Server(){};
-	~Server(){};
-	void Init(uint16_t port);
-	int WaitNewClient(fd_set *p_set);
-	int GetConnectFd();
-	int AddNewClient(int fd);
-	int ReadAndWrite(void);
+    Server(){};
+    ~Server(){};
+    void Init(uint16_t port);
+    int WaitNewClient(fd_set *p_set);
+    int GetConnectFd();
+    int AddNewClient(int fd);
+    int ReadAndWrite(void);
 
-	SockRecorder recorder;
-	fd_set allset;	
+    SockRecorder recorder;
+    fd_set allset;  
 private:
-	struct sockaddr_in servaddr;
-	int listenfd;
+    struct sockaddr_in servaddr;
+    int listenfd;
 };
 };
 #endif
